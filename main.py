@@ -14,13 +14,17 @@ import sys
 LETTER = "A"
 
 
+def validate_letter(letter: str) -> None:
+    if len(letter) != 1 or letter.isspace():
+        raise ValueError("letter must be exactly 1 non-whitespace character")
+
+
 def main() -> int:
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
 
-    if len(LETTER) != 1 or LETTER.isspace():
-        raise ValueError("letter must be exactly 1 non-whitespace character")
+    validate_letter(LETTER)
 
     with open(path, "w", encoding="utf-8", newline="") as f:
         f.write(LETTER)
